@@ -143,5 +143,9 @@ for item, frame in tate['placeOfBirth'].iteritems():
 
 print(bostonians.info())
 
+# Create dataframe of female artists born in Boston
+boston_women = bostonians[bostonians['gender'] == 'Female']
+
+
 
 
