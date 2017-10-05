@@ -4,6 +4,7 @@ import urllib3
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
+import re
 
 # Read in csv file from Tate's GitHub
 tate = pd.read_csv("https://raw.githubusercontent.com/tategallery/collection/master/artist_data.csv")
@@ -116,4 +117,31 @@ gen_x_counts.dtypes
 # Plot df
 gen_x_counts.plot(kind='bar', stacked=True)
 gen_x_counts.plot(kind='line')
+
+
+# Create dataframe of artists born in the USA
+americans = pd.DataFrame(columns=tate.columns)
+
+for item, frame in tate['placeOfBirth'].iteritems():
+    match = re.search("United States", str(frame))
+    if match:
+        #print(tate.loc[item])
+        americans = americans.append(tate.loc[item],ignore_index=True)
+
+print(americans.info())
+        
+        
+# Create dataframe of artists born in Boston
+
+bostonians = pd.DataFrame(columns=tate.columns)
+
+for item, frame in tate['placeOfBirth'].iteritems():
+    match = re.search("Boston", str(frame))
+    if match:
+        #print(tate.loc[item])
+        bostonians = bostonians.append(tate.loc[item],ignore_index=True)
+
+print(bostonians.info())
+
+
 
